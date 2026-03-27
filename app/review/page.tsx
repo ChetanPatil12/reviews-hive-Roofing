@@ -46,7 +46,7 @@ function ReviewFlow() {
       });
     }
 
-    setScreen("rating");
+    setScreen(step === 1 ? "rating" : "positive");
   }, [customerId, jobId, step]);
 
   async function handleSubmitRating() {
