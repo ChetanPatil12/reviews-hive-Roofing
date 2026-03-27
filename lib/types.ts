@@ -4,7 +4,7 @@ export type WebhookEventType =
   | "review_link_clicked"
   | "negative_feedback_submitted";
 
-export type Platform = "google" | "facebook" | "bbb";
+export type Platform = "google" | "facebook" | "bbb" | "yelp";
 
 export interface PageVisitedPayload {
   event_type: "page_visited";
@@ -49,7 +49,7 @@ export type WebhookPayload =
   | ReviewLinkClickedPayload
   | NegativeFeedbackSubmittedPayload;
 
-export type ReviewStep = 1 | 2 | 3 | 4;
+export type ReviewStep = 1 | 2 | 3 | 4 | 5;
 
 export interface ReviewParams {
   customer_id: string | null;

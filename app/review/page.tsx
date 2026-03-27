@@ -13,7 +13,7 @@ import type { AppScreen, ReviewStep } from "@/lib/types";
 
 function parseStep(raw: string | null): ReviewStep {
   const n = parseInt(raw ?? "1", 10);
-  if (n === 2 || n === 3 || n === 4) return n;
+  if (n === 2 || n === 3 || n === 4 || n === 5) return n;
   return 1;
 }
 

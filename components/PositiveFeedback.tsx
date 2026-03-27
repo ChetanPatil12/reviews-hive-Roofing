@@ -15,36 +15,43 @@ function getStepConfig(step: ReviewStep): {
   buttonText: string;
   url: string;
   platform: Platform;
-  photoNote: boolean;
+  message: string;
 } {
   switch (step) {
     case 2:
       return {
-        buttonText: "Add a Photo to Your Google Review",
+        buttonText: "Leave a Google Video Testimonial",
         url: process.env.NEXT_PUBLIC_GOOGLE_REVIEW_URL || "#",
         platform: "google",
-        photoNote: true,
+        message: "Please give us a video testimonial on Google review.",
       };
     case 3:
-      return {
-        buttonText: "Leave a Facebook Review",
-        url: process.env.NEXT_PUBLIC_FACEBOOK_REVIEW_URL || "#",
-        platform: "facebook",
-        photoNote: false,
-      };
-    case 4:
       return {
         buttonText: "Leave a BBB Review",
         url: process.env.NEXT_PUBLIC_BBB_REVIEW_URL || "#",
         platform: "bbb",
-        photoNote: false,
+        message: "Please give us a BBB review.",
+      };
+    case 4:
+      return {
+        buttonText: "Leave a Facebook Review",
+        url: process.env.NEXT_PUBLIC_FACEBOOK_REVIEW_URL || "#",
+        platform: "facebook",
+        message: "Please give us a Facebook review.",
+      };
+    case 5:
+      return {
+        buttonText: "Leave a Yelp Review",
+        url: process.env.NEXT_PUBLIC_YELP_REVIEW_URL || "#",
+        platform: "yelp",
+        message: "Please give us a review on Yelp.",
       };
     default:
       return {
         buttonText: "Leave a Google Review",
         url: process.env.NEXT_PUBLIC_GOOGLE_REVIEW_URL || "#",
         platform: "google",
-        photoNote: false,
+        message: "Please give us a Google review.",
       };
   }
 }
@@ -97,21 +104,13 @@ export default function PositiveFeedback({
       <div className="space-y-2">
         <h1 className="text-2xl font-bold text-gray-900">Thank you!</h1>
         <p className="text-gray-600 text-sm leading-relaxed">
-          We&apos;re so glad you had a great experience! Would you mind sharing it on{" "}
-          {config.platform === "google"
-            ? "Google"
-            : config.platform === "facebook"
-            ? "Facebook"
-            : "BBB"}
-          ? It really helps our small business.
+          We&apos;re so glad you had a great experience! {config.message}
         </p>
       </div>
 
-      {config.photoNote && (
-        <p className="text-sm text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-4 py-3">
-          Adding a photo of your new roof makes your review even more helpful for other homeowners!
-        </p>
-      )}
+      <p className="text-sm text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-4 py-3">
+        If you have any photos of the completed job, please share them in your review — it really helps other customers see the quality of our work!
+      </p>
 
       <div className="space-y-2">
         <button
