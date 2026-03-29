@@ -49,7 +49,7 @@ export type WebhookPayload =
   | ReviewLinkClickedPayload
   | NegativeFeedbackSubmittedPayload;
 
-export type ReviewStep = 1 | 2 | 3 | 4 | 5;
+export type ReviewStep = 1 | 2 | 3 | 4 | 5 | 6;
 
 export interface ReviewParams {
   customer_id: string | null;
