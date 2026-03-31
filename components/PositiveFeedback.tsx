@@ -27,10 +27,10 @@ function getStepConfig(step: ReviewStep): {
       };
     case 3:
       return {
-        buttonText: "Leave a Google Video Testimonial",
-        url: process.env.NEXT_PUBLIC_GOOGLE_VIDEO_REVIEW_URL || "#",
-        platform: "google",
-        message: "Please give us a video testimonial on Google review.",
+        buttonText: "Give Us a Video Testimonial",
+        url: process.env.NEXT_PUBLIC_VIDEO_TESTIMONIAL_URL || "#",
+        platform: "video_testimonial",
+        message: "Give us a video testimonial review.",
       };
     case 4:
       return {

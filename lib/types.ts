@@ -4,7 +4,7 @@ export type WebhookEventType =
   | "review_link_clicked"
   | "negative_feedback_submitted";
 
-export type Platform = "google" | "facebook" | "bbb" | "yelp";
+export type Platform = "google" | "facebook" | "bbb" | "yelp" | "video_testimonial";
 
 export interface PageVisitedPayload {
   event_type: "page_visited";
