@@ -23,6 +23,7 @@ function ReviewFlow() {
   const jobId = searchParams.get("job_id") ?? "";
   const name = searchParams.get("name");
   const step = parseStep(searchParams.get("step"));
+  const alreadyRated = searchParams.get("rated") === "true";
 
   const [screen, setScreen] = useState<AppScreen | null>(null);
   const [rating, setRating] = useState<number>(0);
@@ -46,7 +47,9 @@ function ReviewFlow() {
       });
     }
 
-    setScreen(step === 1 ? "rating" : "positive");
+    // Show star rating only for step 1 and only if they haven't rated yet.
+    // If alreadyRated=true, skip straight to the review prompt.
+    setScreen(step === 1 && !alreadyRated ? "rating" : "positive");
   }, [customerId, jobId, step]);
 
   async function handleSubmitRating() {
