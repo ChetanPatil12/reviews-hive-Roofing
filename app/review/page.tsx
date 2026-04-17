@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
-import StarRating from "@/components/StarRating";
+import NpsRating from "@/components/NpsRating";
 import PositiveFeedback from "@/components/PositiveFeedback";
 import NegativeFeedback from "@/components/NegativeFeedback";
 import ThankYou from "@/components/ThankYou";
@@ -23,11 +23,10 @@ function ReviewFlow() {
   const jobId = searchParams.get("job_id") ?? "";
   const name = searchParams.get("name");
   const step = parseStep(searchParams.get("step"));
-  const alreadyRated = searchParams.get("rated") === "true";
 
   const [screen, setScreen] = useState<AppScreen | null>(null);
-  const [rating, setRating] = useState<number>(0);
-  const [pendingRating, setPendingRating] = useState<number>(0);
+  const [nps, setNps] = useState<number>(0);
+  const [pendingNps, setPendingNps] = useState<number>(0);
   const hasSentVisit = useRef(false);
 
   useEffect(() => {
@@ -47,26 +46,25 @@ function ReviewFlow() {
       });
     }
 
-    // Show star rating only for step 1 and only if they haven't rated yet.
-    // If alreadyRated=true, skip straight to the review prompt.
-    setScreen(step === 1 && !alreadyRated ? "rating" : "positive");
+    // Always show NPS rating first on every step
+    setScreen("rating");
   }, [customerId, jobId, step]);
 
-  async function handleSubmitRating() {
-    if (pendingRating === 0) return;
-    const stars = pendingRating;
-    setRating(stars);
+  async function handleSubmitNps() {
+    if (pendingNps === 0) return;
+    const score = pendingNps;
+    setNps(score);
 
     await sendWebhookEvent({
       event_type: "rating_submitted",
       customer_id: customerId!,
       job_id: jobId,
-      rating: stars,
+      rating: score,
       step,
       timestamp: new Date().toISOString(),
     });
 
-    if (stars >= 4) {
+    if (score >= 7) {
       setScreen("positive");
     } else {
       setScreen("negative");
@@ -100,7 +98,7 @@ function ReviewFlow() {
         <ErrorScreen />
       </div>
 
-      {/* Star Rating */}
+      {/* NPS Rating */}
       <div
         className={`transition-all duration-400 ${
           screen === "rating"
@@ -113,26 +111,26 @@ function ReviewFlow() {
           <div className="space-y-2">
             <h1 className="text-xl font-semibold text-gray-900 leading-snug">
               {name
-                ? `Hi ${name}, how was your experience with ${
+                ? `Hi ${name}, how likely are you to recommend ${
                     process.env.NEXT_PUBLIC_COMPANY_NAME || "Hive Roofing and Solar"
-                  }?`
-                : `How was your experience with ${
+                  } to a friend or family member?`
+                : `How likely are you to recommend ${
                     process.env.NEXT_PUBLIC_COMPANY_NAME || "Hive Roofing and Solar"
-                  }?`}
+                  } to a friend or family member?`}
             </h1>
-            <p className="text-sm text-gray-500">Tap a star to rate us</p>
+            <p className="text-sm text-gray-500">Select a score from 1 to 10</p>
           </div>
-          <StarRating value={pendingRating} onChange={setPendingRating} />
+          <NpsRating value={pendingNps} onChange={setPendingNps} />
           <div
             className={`transition-all duration-300 ${
-              pendingRating > 0
+              pendingNps > 0
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 translate-y-2 pointer-events-none"
             }`}
           >
             <button
               type="button"
-              onClick={handleSubmitRating}
+              onClick={handleSubmitNps}
               className="
                 w-full bg-blue-600 hover:bg-blue-700 active:bg-blue-800
                 text-white font-semibold text-base
@@ -141,7 +139,7 @@ function ReviewFlow() {
                 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2
               "
             >
-              Submit Rating
+              Submit
             </button>
           </div>
         </div>
@@ -160,7 +158,7 @@ function ReviewFlow() {
           <PositiveFeedback
             customerId={customerId}
             jobId={jobId}
-            rating={rating}
+            rating={nps}
             step={step}
             onReviewClicked={handleReviewClicked}
           />
@@ -180,7 +178,7 @@ function ReviewFlow() {
           <NegativeFeedback
             customerId={customerId}
             jobId={jobId}
-            rating={rating}
+            rating={nps}
             step={step}
             onSubmitted={handleNegativeSubmitted}
           />
