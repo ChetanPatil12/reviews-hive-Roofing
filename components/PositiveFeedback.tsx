@@ -115,9 +115,11 @@ export default function PositiveFeedback({
         </p>
       </div>
 
-      <p className="text-sm text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-4 py-3">
-        If you have any photos of the completed job, please share them in your review — it really helps other customers see the quality of our work!
-      </p>
+      {(step === 1 || step === 5) && (
+        <p className="text-sm text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-4 py-3">
+          If you have any photos of the completed job, please share them in your review — it really helps other customers see the quality of our work!
+        </p>
+      )}
 
       <div className="space-y-2">
         <button
