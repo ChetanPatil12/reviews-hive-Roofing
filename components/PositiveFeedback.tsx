@@ -2,6 +2,7 @@
 
 import type { ReviewStep, Platform } from "@/lib/types";
 import { sendWebhookEvent } from "@/lib/webhook";
+import ReviewSuggestions from "@/components/ReviewSuggestions";
 
 interface PositiveFeedbackProps {
   customerId: string;
@@ -154,6 +155,8 @@ export default function PositiveFeedback({
         </button>
         <p className="text-xs text-gray-400">This will open in a new tab</p>
       </div>
+
+      <ReviewSuggestions step={step} />
     </div>
   );
 }
