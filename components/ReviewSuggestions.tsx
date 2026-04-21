@@ -38,6 +38,11 @@ export default function ReviewSuggestions({ step }: { step: ReviewStep }) {
             key={s.id}
             className="relative bg-gray-50 border border-gray-200 rounded-xl px-4 pt-4 pb-3"
           >
+            {s.type === "one-liner" && (
+              <span className="absolute top-3 right-3 text-[10px] font-medium text-blue-500 bg-blue-50 rounded px-1.5 py-0.5">
+                quick
+              </span>
+            )}
             {s.type === "detailed" && (
               <span className="absolute top-3 right-3 text-[10px] font-medium text-gray-400 bg-gray-100 rounded px-1.5 py-0.5">
                 detailed
