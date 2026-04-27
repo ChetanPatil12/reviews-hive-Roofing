@@ -237,15 +237,15 @@ const yelpSuggestions: Suggestion[] = [
 export function getSuggestions(step: ReviewStep): Suggestion[] {
   switch (step) {
     case 2:
-      return facebookSuggestions;
-    case 3:
-      return videoSuggestions;
-    case 4:
-      return bbbSuggestions;
-    case 5:
-      return googlePhotosSuggestions;
-    case 6:
       return yelpSuggestions;
+    case 3:
+      return facebookSuggestions;
+    case 4:
+      return videoSuggestions;
+    case 5:
+      return bbbSuggestions;
+    case 6:
+      return googlePhotosSuggestions;
     default:
       return googleSuggestions;
   }

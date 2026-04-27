@@ -21,38 +21,38 @@ function getStepConfig(step: ReviewStep): {
   switch (step) {
     case 2:
       return {
+        buttonText: "Leave a Yelp Review",
+        url: process.env.NEXT_PUBLIC_YELP_REVIEW_URL || "#",
+        platform: "yelp",
+        message: "Please give us a review on Yelp.",
+      };
+    case 3:
+      return {
         buttonText: "Leave a Facebook Review",
         url: process.env.NEXT_PUBLIC_FACEBOOK_REVIEW_URL || "#",
         platform: "facebook",
         message: "Please give us a Facebook review.",
       };
-    case 3:
+    case 4:
       return {
         buttonText: "Give Us a Video Testimonial",
         url: process.env.NEXT_PUBLIC_VIDEO_TESTIMONIAL_URL || "#",
         platform: "video_testimonial",
         message: "Give us a video testimonial review.",
       };
-    case 4:
+    case 5:
       return {
         buttonText: "Leave a BBB Review",
         url: process.env.NEXT_PUBLIC_BBB_REVIEW_URL || "#",
         platform: "bbb",
         message: "Please give us a BBB review.",
       };
-    case 5:
+    case 6:
       return {
         buttonText: "Leave a Google Review with Photos",
         url: process.env.NEXT_PUBLIC_GOOGLE_REVIEW_URL || "#",
         platform: "google",
         message: "Please give us a Google review with photos of your completed job.",
-      };
-    case 6:
-      return {
-        buttonText: "Leave a Yelp Review",
-        url: process.env.NEXT_PUBLIC_YELP_REVIEW_URL || "#",
-        platform: "yelp",
-        message: "Please give us a review on Yelp.",
       };
     default:
       return {
@@ -116,7 +116,7 @@ export default function PositiveFeedback({
         </p>
       </div>
 
-      {(step === 1 || step === 5) && (
+      {(step === 1 || step === 6) && (
         <p className="text-sm text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-4 py-3">
           If you have any photos of the completed job, please share them in your review — it really helps other customers see the quality of our work!
         </p>
