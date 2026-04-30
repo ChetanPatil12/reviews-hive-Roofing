@@ -73,8 +73,15 @@ export default function PositiveFeedback({
 }: PositiveFeedbackProps) {
   const config = getStepConfig(step);
 
-  async function handleReviewClick() {
-    await sendWebhookEvent({
+  function handleReviewClick() {
+    // Open the review page synchronously before any async work.
+    // iOS Safari blocks window.open() called after an await — it requires
+    // the call to happen directly inside the user gesture (tap/click) handler.
+    window.open(config.url, "_blank", "noopener,noreferrer");
+    onReviewClicked();
+
+    // Fire webhook in background — result doesn't affect the redirect
+    sendWebhookEvent({
       event_type: "review_link_clicked",
       customer_id: customerId,
       job_id: jobId,
@@ -82,10 +89,7 @@ export default function PositiveFeedback({
       step,
       platform: config.platform,
       timestamp: new Date().toISOString(),
-    });
-
-    window.open(config.url, "_blank", "noopener,noreferrer");
-    onReviewClicked();
+    }).catch((err) => console.error("[review-link] webhook failed:", err));
   }
 
   return (
