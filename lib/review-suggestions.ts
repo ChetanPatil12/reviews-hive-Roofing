@@ -239,11 +239,11 @@ export function getSuggestions(step: ReviewStep): Suggestion[] {
     case 2:
       return yelpSuggestions;
     case 3:
-      return facebookSuggestions;
-    case 4:
-      return videoSuggestions;
-    case 5:
       return bbbSuggestions;
+    case 4:
+      return facebookSuggestions;
+    case 5:
+      return videoSuggestions;
     case 6:
       return googlePhotosSuggestions;
     default:
@@ -252,10 +252,10 @@ export function getSuggestions(step: ReviewStep): Suggestion[] {
 }
 
 export function getSuggestionsLabel(step: ReviewStep): string {
-  if (step === 3) return "Not sure what to say? Here are some talking points:";
+  if (step === 5) return "Not sure what to say? Here are some talking points:";
   return "Not sure what to write? Here are some ideas:";
 }
 
 export function getCopyLabel(step: ReviewStep): string {
-  return step === 3 ? "Copy talking point" : "Copy suggestion";
+  return step === 5 ? "Copy talking point" : "Copy suggestion";
 }

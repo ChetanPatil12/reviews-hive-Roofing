@@ -28,24 +28,24 @@ function getStepConfig(step: ReviewStep): {
       };
     case 3:
       return {
+        buttonText: "Leave a BBB Review",
+        url: process.env.NEXT_PUBLIC_BBB_REVIEW_URL || "#",
+        platform: "bbb",
+        message: "Please give us a BBB review.",
+      };
+    case 4:
+      return {
         buttonText: "Leave a Facebook Review",
         url: process.env.NEXT_PUBLIC_FACEBOOK_REVIEW_URL || "#",
         platform: "facebook",
         message: "Please give us a Facebook review.",
       };
-    case 4:
+    case 5:
       return {
         buttonText: "Give Us a Video Testimonial",
         url: process.env.NEXT_PUBLIC_VIDEO_TESTIMONIAL_URL || "#",
         platform: "video_testimonial",
         message: "Give us a video testimonial review.",
-      };
-    case 5:
-      return {
-        buttonText: "Leave a BBB Review",
-        url: process.env.NEXT_PUBLIC_BBB_REVIEW_URL || "#",
-        platform: "bbb",
-        message: "Please give us a BBB review.",
       };
     case 6:
       return {
