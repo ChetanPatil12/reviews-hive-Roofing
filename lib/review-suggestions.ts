@@ -239,9 +239,9 @@ export function getSuggestions(step: ReviewStep): Suggestion[] {
     case 2:
       return yelpSuggestions;
     case 3:
-      return bbbSuggestions;
-    case 4:
       return facebookSuggestions;
+    case 4:
+      return bbbSuggestions;
     case 5:
       return videoSuggestions;
     case 6:
